@@ -1,5 +1,6 @@
 package ru.geekbrains.lesson7SpringData.controllers;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.lesson7SpringData.model.Product;
 import ru.geekbrains.lesson7SpringData.services.ProductService;
@@ -18,6 +19,15 @@ public class ProductController {
     public List<Product> findAll(){
         return productService.findAll();
     }
+    //контроллер для поиска всех товаров с разбивкой на страницы
+//    @GetMapping("/products")
+//    public Page<Product> findAll(@RequestParam(name = "page", defaultValue = "1") int pageIndex){
+//        if (pageIndex < 1) {
+//            pageIndex = 1;
+//        }
+//            return productService.findAll(pageIndex - 1, 10);
+//        }
+
     //контроллер для поиска товаров дешевле максимальной цены: http://localhost:8189/app/products/price/beforemax?max=30
     @GetMapping("/products/price/beforemax")
     public List<Product> findByPriceIsBefore(@RequestParam (name = "max") int maxPrice){
@@ -47,8 +57,8 @@ public class ProductController {
     }
 
     //контроллер для удаления товара по его id
-    @GetMapping("/products/delete/{id}")
-    public void deleteById(@PathVariable Long id){
+    @GetMapping("/products/delete")
+    public void deleteById(@RequestParam (name = "id") Long id){
         productService.deleteById(id);
     }
 

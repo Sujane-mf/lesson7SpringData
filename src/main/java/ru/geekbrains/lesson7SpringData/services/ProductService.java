@@ -1,5 +1,7 @@
 package ru.geekbrains.lesson7SpringData.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.lesson7SpringData.model.Product;
 import ru.geekbrains.lesson7SpringData.repositories.ProductRepository;
@@ -17,6 +19,10 @@ public class ProductService {
 
     public List<Product> findAll(){
         return productRepository.findAll();
+    }
+
+    public Page<Product> findAll(int pageIndex, int pageSize){
+        return productRepository.findAll(PageRequest.of(pageIndex, pageSize));
     }
 
     public List<Product> findByPriceIsBefore(int maxPrice){
