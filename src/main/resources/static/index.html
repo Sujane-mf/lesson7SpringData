@@ -34,6 +34,19 @@
         </tbody>
     </table>
 <button type="button" class="btn btn-primary" ng-click="loadProducts()">Обновить</button>
+    <p></p>
+    <h3>Добавить продукт</h3>
+    <form novalidate ng-submit="createProduct()">
+        <div class="mb-3">
+            <label  class="form-label">Title</label>
+            <input type="text" class="form-control" placeholder="Title" ng-model="new_product.title">
+        </div>
+        <div class="mb-3">
+            <label  class="form-label">Price</label>
+            <input type="text" class="form-control" placeholder="Price" ng-model="new_product.price">
+        </div>
+        <button type="submit" class="btn btn-primary" ng-submit="createProduct(new_product.title, new_product.price)">Submit</button>
+    </form>
 </div>
 </body>
 </html>
