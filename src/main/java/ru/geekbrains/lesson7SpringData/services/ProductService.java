@@ -3,6 +3,7 @@ package ru.geekbrains.lesson7SpringData.services;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.lesson7SpringData.model.Product;
 import ru.geekbrains.lesson7SpringData.repositories.ProductRepository;
 
@@ -45,6 +46,11 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    public void updateProduct(Product product){
+        Product update_product = findById(product.getId()).get();
+        update_product.setTitle(product.getTitle());
+        update_product.setPrice(product.getPrice());
+    }
     public void deleteById(Long id){
         productRepository.deleteById(id);
     }

@@ -1,6 +1,7 @@
 package ru.geekbrains.lesson7SpringData.controllers;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.lesson7SpringData.model.Product;
 import ru.geekbrains.lesson7SpringData.services.ProductService;
@@ -50,15 +51,39 @@ public class ProductController {
         return productService.findById(id).get();
     }
 
-    //контроллер для создания товара:
-    @PostMapping("products/create")
-    public Product saveProduct(@RequestParam (name = "title") String title, @RequestParam (name = "price") int price){
-        return productService.save(new Product(title,price));
+   //контроллер для создания товара:
+//    @PostMapping("products/create")
+//    public Product saveProduct(@RequestParam (name = "title") String title, @RequestParam (name = "price") int price){
+//        Product product = new Product(title,price);
+//        return productService.save(product);
+//    }
+
+    @PostMapping("/products")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product save(@RequestBody Product product) {
+        Product new_product = new Product();
+        new_product.setId(product.getId());
+        new_product.setTitle(product.getTitle());
+        new_product.setPrice(product.getPrice());
+        return productService.save(new_product);
+    }
+
+    //контроллер для апдейта товара
+    @PutMapping("/products")
+    public void updateProduct(@RequestBody Product product)
+    {
+        productService.updateProduct(product);
     }
 
     //контроллер для удаления товара по его id
     @GetMapping("/products/delete")
     public void deleteById(@RequestParam (name = "id") Long id){
+        productService.deleteById(id);
+    }
+
+    //удаление по id 2ой вариант
+    @DeleteMapping("/products/{id}")
+    public void deleteProduct(@PathVariable Long id){
         productService.deleteById(id);
     }
 
