@@ -20,14 +20,6 @@ public class ProductController {
     public List<Product> findAll(){
         return productService.findAll();
     }
-    //контроллер для поиска всех товаров с разбивкой на страницы
-//    @GetMapping("/products")
-//    public Page<Product> findAll(@RequestParam(name = "page", defaultValue = "1") int pageIndex){
-//        if (pageIndex < 1) {
-//            pageIndex = 1;
-//        }
-//            return productService.findAll(pageIndex - 1, 10);
-//        }
 
     //контроллер для поиска товаров дешевле максимальной цены: http://localhost:8189/app/products/price/beforemax?max=30
     @GetMapping("/products/price/beforemax")
@@ -50,13 +42,6 @@ public class ProductController {
     public Product findById(@PathVariable Long id){
         return productService.findById(id).get();
     }
-
-   //контроллер для создания товара:
-//    @PostMapping("products/create")
-//    public Product saveProduct(@RequestParam (name = "title") String title, @RequestParam (name = "price") int price){
-//        Product product = new Product(title,price);
-//        return productService.save(product);
-//    }
 
     @PostMapping("/products")
     @ResponseStatus(HttpStatus.CREATED)

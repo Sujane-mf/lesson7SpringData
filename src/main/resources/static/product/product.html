@@ -1,0 +1,23 @@
+<div>
+    <h2>Список продуктов</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Title</td>
+            <td>Price</td>
+            <td>Delete</td>
+            <td>Update</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat = "p in products">
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.price}}</td>
+            <td><button type="button" class="btn btn-primary" ng-click="deleteProduct(p.id)">Удалить</button></td>
+            <td><button type="button" class="btn btn-primary" ng-click="navToEditProductPage(p.id)">Обновить</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
