@@ -13,9 +13,19 @@ import java.util.Optional;
 @Service
 public class ProductService {
     private ProductRepository productRepository;
+    private CartService cartService;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, CartService cartService) {
         this.productRepository = productRepository;
+        this.cartService = cartService;
+    }
+
+    public void addProductToCartByCartId(Long cartId, Product product){
+      cartService.addProductToCart(cartId, product);
+    }
+
+    public void deleteProductFromCartByCartId(Long cartId, Product product){
+        cartService.deleteProductFromCart(cartId, product);
     }
 
     public List<Product> findAll(){
@@ -46,10 +56,11 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    @Transactional
     public void updateProduct(Product product){
-        Product update_product = findById(product.getId()).get();
-        update_product.setTitle(product.getTitle());
-        update_product.setPrice(product.getPrice());
+        Product updated_product = findById(product.getId()).get();
+        updated_product.setTitle(product.getTitle());
+        updated_product.setPrice(product.getPrice());
     }
     public void deleteById(Long id){
         productRepository.deleteById(id);

@@ -2,7 +2,8 @@ create table products
 (
     id    bigserial primary key,
     title varchar(255),
-    price int
+    price int,
+    cart_id int
 );
 
 insert into products(title,price)
@@ -27,3 +28,7 @@ values
 -- ('Book', 12),
 -- ('Paper', 2),
 -- ('Vodka', 30);
+
+CREATE TABLE carts (id bigserial PRIMARY KEY, product_id bigint, foreign key (product_id) references products(id));
+insert into carts(product_id)
+values (1);

@@ -16,6 +16,10 @@ public class Product {
     @Column(name = "price")
     private int price;
 
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
     public Product() {
     }
 
