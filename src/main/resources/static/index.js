@@ -14,6 +14,10 @@
                 templateUrl: 'product/product.html',
                 controller: 'productPageController'
             })
+            .when('/auth',{
+                templateUrl: 'registration_page/registration.html',
+                controller: 'registrationPageController'
+             })
             .when('/edit_product/:productId', {
                 templateUrl: 'edit_product/edit.html',
                 controller: 'editProductController'
@@ -27,7 +31,10 @@
             });
     }
 
-    function run($rootScope, $http) {
+    function run($rootScope, $http, $localStorage) {
+        if ($localStorage.webMarketUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.webMarketUser.token;
+        }
     }
 })();
 
